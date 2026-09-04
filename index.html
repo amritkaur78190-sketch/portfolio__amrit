@@ -28,17 +28,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root{
-    /* Distinct palette: deep plum ink + warm coral/teal/periwinkle instead of the black/cyan/mint/lavender/green reference look */
-    --ink:#211B2E;
-    --bg-hero:#FFD7B0;      /* warm peach */
-    --bg-cream:#FFE49E;     /* golden butter — pulled brighter/warmer so it reads distinct from peach */
-    --bg-teal:#A9E8DB;      /* fresh mint teal, a touch more saturated for pop */
-    --bg-periwinkle:#C9C3FB;/* periwinkle, slightly more vivid */
+    --ink:#241E33;
+    --bg-hero:#FFD9C0;      
+    --bg-cream:#FCE49A;     
+    --bg-teal:#B7E4DE;      
+    --bg-periwinkle:#C6C4F0;
     --bg-grey:#F6F2EC;
     --white:#FFFFFF;
-    --coral:#FF5A3C;        /* primary accent — punchier red-orange */
-    --teal-accent:#0EA893;  /* secondary accent — richer teal */
-    --blush:#FFD4E0;        /* pulled toward pink, away from coral, so the two don't muddy together */
+    --coral:#FF6F51;        
+    --teal-accent:#1FA898;  
+    --blush:#FBD6E4;
     --red-dot:#E8433C;
     --muted:#4A4358;
     --radius:20px;
@@ -77,7 +76,9 @@
   a:focus-visible,
   button:focus-visible,
   .btn:focus-visible,
-  .social-icon:focus-visible{
+  .social-icon:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible{
     outline:3px solid var(--teal-accent);
     outline-offset:3px;
     border-radius:6px;
@@ -92,7 +93,7 @@
   nav.wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;position:relative;}
   .logo{font-family:'Fredoka',sans-serif;font-size:1.7rem;font-weight:600;display:flex;align-items:center;gap:8px;}
   .logo .dot{width:9px;height:9px;border-radius:50%;background:var(--coral);display:inline-block;}
-  .nav-links{display:flex;gap:28px;font-weight:700;list-style:none;margin:0;padding:0;}
+  .nav-links{display:flex;gap:28px;font-weight:700;list-style:none;margin:0;padding:0;align-items:center;}
   .nav-links a{text-decoration:none;padding-bottom:4px;border-bottom:3px solid transparent;transition:border-color .15s, color .15s;}
   .nav-links a:hover, .nav-links a.active{border-color:var(--coral); color:var(--coral);}
   .nav-links a.active{font-family:var(--mono);}
@@ -102,7 +103,7 @@
   .burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
   .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
   .nav-controls{display:flex;align-items:center;gap:12px;}
-  .theme-toggle{
+  .theme-toggle, .print-toggle{
     width:42px;height:42px;
     border:2.5px solid var(--ink);
     border-radius:50%;
@@ -114,11 +115,12 @@
     box-shadow:3px 3px 0 var(--ink);
     transition:transform .15s ease, box-shadow .15s ease, background-color .2s ease, color .2s ease;
   }
-  .theme-toggle:hover{transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--ink);}
+  .theme-toggle:hover, .print-toggle:hover{transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--ink);}
   @media (max-width:800px){
     .nav-links{
       display:flex;
       flex-direction:column;
+      align-items:stretch;
       gap:0;
       position:absolute;
       top:100%;left:0;right:0;
@@ -130,7 +132,7 @@
       opacity:0;
       transition:max-height .25s ease, opacity .2s ease, padding .25s ease;
     }
-    .nav-links.open{max-height:400px; opacity:1; padding:12px 24px 20px;}
+    .nav-links.open{max-height:450px; opacity:1; padding:12px 24px 20px;}
     .nav-links a{display:block;padding:12px 0;border-bottom:2px solid var(--bg-grey);}
     .nav-links a:last-child{border-bottom:none;}
     .burger{display:flex;}
@@ -232,7 +234,6 @@
   }
   @media (prefers-reduced-motion: reduce){
     .reveal{transition:none; opacity:1; filter:none; transform:none;}
-    .radar-sweep, .radar-blip{animation:none !important;}
   }
 
   /* ---- Hero ---- */
@@ -328,7 +329,7 @@
     .hero-avatar-frame{max-width:240px;}
   }
 
-  /* ---- Keypoint rows (replace prose paragraphs across sections) ---- */
+  /* ---- Keypoint rows ---- */
   .point-row{
     display:flex;align-items:flex-start;gap:12px;
     background:var(--white);
@@ -351,23 +352,22 @@
   .point-row.sm .txt{font-size:.92rem;}
   .point-row.sm .pnum{width:20px;height:20px;font-size:.66rem;}
 
-  /* ---- Custom cursor: crosshair mark matching the ink/coral palette ---- */
+  /* ---- Custom cursor ---- */
   body{
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='13' fill='none' stroke='%23241E33' stroke-width='2.5'/%3E%3Cline x1='18' y1='0' x2='18' y2='9' stroke='%23241E33' stroke-width='2.5'/%3E%3Cline x1='18' y1='27' x2='18' y2='36' stroke='%23241E33' stroke-width='2.5'/%3E%3Cline x1='0' y1='18' x2='9' y2='18' stroke='%23241E33' stroke-width='2.5'/%3E%3Cline x1='27' y1='18' x2='36' y2='18' stroke='%23241E33' stroke-width='2.5'/%3E%3Ccircle cx='18' cy='18' r='3.5' fill='%23FF6F51'/%3E%3C/svg%3E") 18 18, crosshair;
   }
-  a, button, .btn, .social-icon, .nav-links a{
+  a, button, .btn, .social-icon, .nav-links a, input, textarea{
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='13' fill='none' stroke='%23FF6F51' stroke-width='3'/%3E%3Cline x1='18' y1='0' x2='18' y2='9' stroke='%23FF6F51' stroke-width='3'/%3E%3Cline x1='18' y1='27' x2='18' y2='36' stroke='%23FF6F51' stroke-width='3'/%3E%3Cline x1='0' y1='18' x2='9' y2='18' stroke='%23FF6F51' stroke-width='3'/%3E%3Cline x1='27' y1='18' x2='36' y2='18' stroke='%23FF6F51' stroke-width='3'/%3E%3Ccircle cx='18' cy='18' r='4' fill='%23241E33'/%3E%3C/svg%3E") 18 18, pointer;
   }
   @media (hover:none), (pointer:coarse){
-    body, a, button, .btn, .social-icon, .nav-links a{cursor:auto;}
+    body, a, button, .btn, .social-icon, .nav-links a, input, textarea{cursor:auto;}
   }
 
-  /* ---- Hide the native scrollbar visually; the soldier track below replaces it ---- */
   html{ scrollbar-width:none; -ms-overflow-style:none; }
   html::-webkit-scrollbar{ display:none; }
   body::-webkit-scrollbar{ display:none; }
 
-  /* ---- Scroll soldier: climbs a small track in place of the scrollbar ---- */
+  /* ---- Scroll soldier ---- */
   .scroll-track{
     position:fixed;
     top:86px; bottom:20px; right:10px;
@@ -399,9 +399,6 @@
   }
   @media (max-width:760px){
     .scroll-track{display:none;}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .scroll-soldier{transition:none;}
   }
 
   /* ---- About ---- */
@@ -460,7 +457,6 @@
   .panel-peri{background:var(--bg-periwinkle);}
   .panel-hero{background:var(--bg-hero);}
 
-  /* ---- Soft Skills chip row ---- */
   .soft-skills-title{font-size:1.5rem;margin:44px 0 16px;display:flex;align-items:center;gap:10px;}
   .soft-skills-wrap{display:flex;flex-wrap:wrap;gap:14px;}
   .soft-chip{
@@ -533,7 +529,7 @@
   }
   .btn-disabled:hover{transform:none; box-shadow:none; filter:none;}
 
-  /* ---- Currently exploring / achievements ---- */
+  /* ---- Growth ---- */
   #growth{background:var(--white);}
   .growth-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
   @media(max-width:800px){.growth-grid{grid-template-columns:1fr;}}
@@ -645,6 +641,40 @@
     transition:transform .18s ease, box-shadow .18s ease;
   }
   .social-icon:hover{transform:translate(-3px,-3px) rotate(-4deg);box-shadow:7px 7px 0 var(--ink);}
+
+  /* ---- Contact Form Styling ---- */
+  .contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    max-width:520px;
+    margin:30px auto 0;
+    text-align:left;
+    padding:26px;
+    background:var(--bg-grey);
+  }
+  .contact-form input,
+  .contact-form textarea{
+    border:3px solid var(--ink);
+    border-radius:10px;
+    padding:14px;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:1rem;
+    font-weight:500;
+    background:var(--white);
+    color:var(--ink);
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder{
+    color:#8A8493;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus{
+    outline:none;
+    border-color:var(--teal-accent);
+    box-shadow:4px 4px 0 var(--teal-accent);
+  }
+
   footer{border-top:3px solid var(--ink); padding:26px 0; text-align:center; font-weight:700; color:var(--muted); margin-top:50px; font-family:var(--mono); font-size:.85rem;}
 
   /* ---- Back to top ---- */
@@ -667,7 +697,56 @@
   .to-top.show{opacity:1; visibility:visible; transform:translateY(0);}
   .to-top:hover{box-shadow:6px 6px 0 var(--ink); transform:translate(-2px,-2px);}
   @media (max-width:760px){ .to-top{right:16px; bottom:18px;} }
+
+  /* ---- A4 Print Stylesheet (Page-by-page, Full Color, Compact Fit) ---- */
+  @media print {
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      background: var(--white) !important;
+      color: var(--ink) !important;
+      font-size: 10.5pt !important;
+    }
+    header, .scroll-track, .to-top, .burger, .nav-controls, .contact-form, .btn {
+      display: none !important;
+    }
+    section {
+      page-break-before: always;
+      break-before: page;
+      padding: 16px 0 !important;
+      min-height: auto !important;
+    }
+    #hero {
+      page-break-before: avoid;
+      break-before: avoid;
+    }
+    .brut {
+      box-shadow: 3px 3px 0 var(--ink) !important;
+      padding: 14px !important;
+    }
+    .section-title {
+      font-size: 1.8rem !important;
+      margin-bottom: 8px !important;
+    }
+    .section-sub {
+      font-size: 0.95rem !important;
+      margin-bottom: 20px !important;
+    }
+    .skill-panels, .project-grid, .growth-grid, .beyond-grid {
+      gap: 14px !important;
+    }
+    .panel, .edu-card, .exp-card, .growth-card, .beyond-card, .project-card {
+      margin-bottom: 12px !important;
+    }
+  }
 </style>
+
 </head>
 <body>
 
@@ -685,8 +764,12 @@
       <li><a href="#growth" data-nav>Achievements</a></li>
       <li><a href="#edu" data-nav>Education</a></li>
       <li><a href="#connect" data-nav>Connect</a></li>
+      <!-- Print action inside the hamburger menu -->
+      <li><a href="#" id="menuPrintBtn" style="color:var(--coral); display:flex; align-items:center; gap:8px;"><i class="fa-solid fa-print"></i> Print Portfolio</a></li>
     </ul>
     <div class="nav-controls">
+      <!-- Print button in navbar header as well for desktop access -->
+      <button class="print-toggle" id="headerPrintBtn" aria-label="Print portfolio" title="Print portfolio"><i class="fa-solid fa-print"></i></button>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
       <button class="burger" id="burgerBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
     </div>
@@ -696,7 +779,7 @@
 <!-- HERO -->
 <section id="hero">
   <div class="wrap">
-    <div class="hero-grid" style="grid-template-columns:1fr;">
+    <div class="hero-grid">
       <div>
         <span class="eyebrow reveal">👋 Amrit Kaur</span>
         <h1 class="reveal" style="--rd:.05s">Building with</h1>
@@ -709,9 +792,14 @@
         </p>
         <div class="hero-actions reveal" style="--rd:.18s">
           <a href="#connect" class="btn btn-coral">Get in Touch</a>
-          <a href="https://drive.google.com/drive/folders/1OWBTwIsFE6y6g6GhOQBoBDAf5BzrALDb?usp=sharing" target="_blank" rel="noopener" class="btn btn-teal"><i class="fa-solid fa-download"></i> Download CV</a>
+          <a href="https://drive.google.com/file/d/17uTNBBHWY7qmnrBCr5hu5C7CM9Lm8UVD/view?usp=sharing" target="_blank" rel="noopener" class="btn btn-teal"><i class="fa-solid fa-download"></i> Download CV</a>
         </div>
         <div class="location reveal" style="--rd:.25s">📍 Saharanpur, Uttar Pradesh</div>
+      </div>
+      <div class="hero-avatar-wrap reveal" style="--rd:.12s">
+        <div class="hero-avatar-frame">
+          <img src="avtar.png" alt="Illustrated portrait of Amrit Kaur">
+        </div>
       </div>
     </div>
   </div>
@@ -952,6 +1040,13 @@
       <a class="social-icon" style="background:#F6F2EC;" href="https://github.com/amritkaur78190-sketch" target="_blank" rel="noopener" title="GitHub" aria-label="View GitHub profile"><i class="devicon-github-original"></i></a>
       <a class="social-icon" style="background:var(--bg-teal);" href="tel:+917819022040" title="Phone" aria-label="Call phone number"><i class="fa-solid fa-phone"></i></a>
     </div>
+
+    <form class="contact-form brut reveal" action="https://formspree.io/f/mbgjkazv" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="_replyto" placeholder="Your Email Address" required>
+      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn btn-coral" style="width:100%;">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+    </form>
   </div>
 </section>
 
@@ -1055,6 +1150,20 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateSoldier);
     updateSoldier();
   }
+
+  /* print portfolio trigger */
+  const triggerPrint = (e) => {
+    e.preventDefault();
+    if(navLinksEl) navLinksEl.classList.remove('open');
+    if(burgerBtn) burgerBtn.setAttribute('aria-expanded', 'false');
+    window.print();
+  };
+
+  const menuPrintBtn = document.getElementById('menuPrintBtn');
+  if(menuPrintBtn) menuPrintBtn.addEventListener('click', triggerPrint);
+
+  const headerPrintBtn = document.getElementById('headerPrintBtn');
+  if(headerPrintBtn) headerPrintBtn.addEventListener('click', triggerPrint);
 
   /* back to top button */
   const toTopBtn = document.getElementById('toTopBtn');
